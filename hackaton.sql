@@ -15,12 +15,12 @@ cpf_doc char(11)
 
 create table aviso(
 consulta_not varchar(200),
-id_aviso int not null auto_increment,
+id_aviso int not null auto_increment primary key,
 aviso_medicamentos varchar(200)
 );
 
 create table hospital(
-id_hospital int not null auto_increment,
+id_hospital int not null auto_increment primary key,
 cep_hos char(8) not null,
 fila_hos varchar(50) not null,
 consulta_med varchar(50),
@@ -29,12 +29,12 @@ registro_med varchar(50)
 );
 
 create table caderneta_vacina(
-id_caderneta int not null auto_increment,
+id_caderneta int not null auto_increment primary key,
 vacinas varchar(100)
 );
 
 create table vacina(
-id_vacina int not null auto_increment,
+id_vacina int not null auto_increment primary key,
 tipo_vac varchar(100),
 disponibilidade_vac boolean not null,
 quantidade_vac boolean,
@@ -51,11 +51,18 @@ disponibilidade_medicamento boolean
 );
 
 create table medico(
-id_medico int not null auto_increment,
+id_medico int not null auto_increment primary key,
 nome_med varchar(100) not null,
 telefone_med varchar(15) not null,
 ch_med varchar(50),
 num_crm varchar(20) not null
+);
+
+create table fluxograma(
+    id_fluxo int not null primary key,
+    entrada_paciente varchar(100),
+    saida_paciente varchar(100),
+    horario_pico char(50)
 );
 
 create table atendimentos(
@@ -70,13 +77,6 @@ create table atendimentos(
     local_atendimento varchar (100),
     foreign key(cod_usuario) references paciente(cod_usuario) on delete no action on update no action,
     foreign key(id_medico) references medico(id_medico) on delete no action on update no action
-);
-
-create table fluxograma(
-    id_fluxo int not null primary key,
-    entrada_paciente varchar(100),
-    saida_paciente varchar(100),
-    horario_pico char(50)
 );
 
 create table controla(
